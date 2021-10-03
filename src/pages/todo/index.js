@@ -8,18 +8,18 @@
 
 import React, { useState } from 'react';
 import {
-  StyleSheet, View, Text, FlatList
+  StyleSheet, View, Text, FlatList, TouchableOpacity
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import api from "../services/api"
-export default function todo_list() {
+import api from "../../services/api"
+export default function todo_list({navigation}) {
   const [tasks, setTasks] = useState([]);
   React.useEffect(async () => {
     const token = await AsyncStorage.getItem("token")
     try {
       var response = await api.get(`api/tasks/`, {
         headers: { Authorization: `Bearer ${token}` }
-    })
+      })
     } catch (error) {
       console.log(error);
       var response = false;
@@ -28,6 +28,9 @@ export default function todo_list() {
       setTasks(response.data)
     }
   }, []);
+  function add() {
+    navigation.navigate('todo-add')
+  }
   renderItem = ({ item, index }) => {
 
     return (
@@ -48,6 +51,16 @@ export default function todo_list() {
           keyExtractor={item => `key ${item.id}`}
         />
       </View>
+
+      <View style={{ position: 'absolute', bottom: 20, right: 10, alignSelf: 'flex-end' }}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={add}
+        >
+          <Text style={styles.textButton}>+</Text>
+        </TouchableOpacity>
+      </View>
+
     </View>
   );
 };
@@ -57,11 +70,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#EBEAED'
   },
   tasksWrapper: {
-    paddingTop: 80,
+    flex: 1,
+    paddingTop: 70,
     paddingHorizontal: 20
   },
   sectionTitle: {
-    fontSize: 27,
+    fontSize: 35,
     fontWeight: "bold"
   },
 
@@ -94,6 +108,18 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     fontSize: 17,
     fontWeight: '700'
+  },
+  button: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 65,
+    height: 65,
+    backgroundColor: '#0183ff',
+    borderRadius: 65,
+  },
+  textButton: {
+    fontSize: 35,
+    fontWeight: "bold"
   }
 });
 

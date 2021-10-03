@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import api from "../services/api"
+import api from "../../services/api"
 
 export default function login({navigation}) {
     const [username, setUsername] = useState('')
