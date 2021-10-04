@@ -12,8 +12,12 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from "../../services/api"
+import { useIsFocused } from '@react-navigation/native'
+
+
 export default function todo_list({navigation}) {
   const [tasks, setTasks] = useState([]);
+  const isFocused = useIsFocused()
   React.useEffect(async () => {
     const token = await AsyncStorage.getItem("token")
     try {
@@ -27,7 +31,7 @@ export default function todo_list({navigation}) {
     if (response != false) {
       setTasks(response.data)
     }
-  }, []);
+  }, [isFocused]);
   function add() {
     navigation.navigate('todo-add')
   }
@@ -114,12 +118,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 65,
     height: 65,
-    backgroundColor: '#0183ff',
+    backgroundColor: '#32cd32',
     borderRadius: 65,
   },
   textButton: {
     fontSize: 35,
-    fontWeight: "bold"
+    fontWeight: "bold",
+    color:'white'
+
   }
 });
 

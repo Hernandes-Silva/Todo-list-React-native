@@ -7,6 +7,8 @@ import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from "../../services/api"
 
+import { constStyles } from '../styles';
+
 export default function login({navigation}) {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -87,7 +89,7 @@ export default function login({navigation}) {
                     <Text style={Styles.text}>Tela de Login</Text>
                 </View>
                 <TextInput 
-                style= {Styles.input}
+                style= {constStyles.input}
                 placeholder = "Usuário" 
                 placeholderTextColor = "#000"
                 value={username}
@@ -96,7 +98,7 @@ export default function login({navigation}) {
                 importantForAutofill = "auto"
                 />
                 <TextInput
-                    style= {Styles.input}
+                    style= {constStyles.input}
                     placeholder = "Password"
                     placeholderTextColor = "#000"
                     secureTextEntry = {true}
@@ -133,18 +135,6 @@ const Styles = StyleSheet.create({
     logHeader:{
         borderRadius: 8,
         marginBottom: 20
-    },
-    
-    input :{
-        height : 46,
-        alignSelf :'stretch',
-        color: '#000',
-        borderWidth: 1,
-        borderColor: '#ddd',
-        marginBottom : 20,
-        borderRadius:10,
-        padding:15
-
     },
     text:{
         fontSize:22,
