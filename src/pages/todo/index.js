@@ -37,10 +37,19 @@ export default function todo_list({navigation}) {
   }
   renderItem = ({ item, index }) => {
 
+    function update(){
+      let id = item.id;
+      let name = item.name;
+      let status = item.status;
+      navigation.navigate('todo-update', {id:id, name:name, status:status})
+    }
     return (
       <View style={styles.viewTask}>
         <View style={styles.squareRed}></View>
         <Text style={styles.textTask}>{item.name}</Text>
+        <TouchableOpacity 
+        onPress={update}>
+          <Text> Update</Text></TouchableOpacity>
       </View>
     )
   }
