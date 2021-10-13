@@ -11,11 +11,10 @@ export default function App() {
     return (
         <NavigationContainer>
             <Stack.Navigator>
-                <Stack.Screen name="login" component={login} />
+                <Stack.Screen name="login" options={{headerShown: false}} component={login} />
                 <Stack.Screen name="todo-list" component={todo_list} />
                 <Stack.Screen name="todo-add" component={todo_add} />
                 <Stack.Screen name="todo-update" component={todo_update} />
-
             </Stack.Navigator>
         </NavigationContainer>
     )
