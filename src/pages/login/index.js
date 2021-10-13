@@ -18,8 +18,8 @@ export default function login({ navigation }) {
     const [password, setPassword] = useState('')
     const [isLoadingToken, setIsLoadingToken] = useState(true)
     const [offset] = useState(new Animated.ValueXY({ x: 0, y: 80 }))
-    const [opacity] = useState( new Animated.Value(0.3))
-    const [logo] = useState( new Animated.ValueXY({x:160, y:200}))
+    const [opacity] = useState(new Animated.Value(0.3))
+    const [logo] = useState(new Animated.ValueXY({ x: 160, y: 200 }))
     React.useEffect(async () => {
         loginComToken()
         AsyncStorage.getItem('token').then((token) => {
@@ -39,40 +39,40 @@ export default function login({ navigation }) {
             }),
             Animated.timing(opacity, {
                 toValue: 1,
-                duration:400,
+                duration: 400,
                 useNativeDriver: true,
             })
 
         ]).start();
 
     }, []);
-    function keyboardDidShow(){
+    function keyboardDidShow() {
         Animated.parallel([
             Animated.timing(logo.y, {
-                toValue:110,
-                duration:70, 
-                useNativeDriver:false
+                toValue: 110,
+                duration: 70,
+                useNativeDriver: false
             }),
             Animated.timing(logo.x, {
-                toValue:85,
+                toValue: 85,
                 duration: 70,
-                useNativeDriver:false
+                useNativeDriver: false
             })
         ]).start();
     }
-    function keyboardDidHide(){
+    function keyboardDidHide() {
         Animated.parallel([
             Animated.timing(logo.y, {
-                toValue:200,
-                duration:100,
-                useNativeDriver:false
-                
+                toValue: 200,
+                duration: 100,
+                useNativeDriver: false
+
             }),
-            Animated.timing(logo.x,{
+            Animated.timing(logo.x, {
                 toValue: 160,
                 duration: 100,
-                useNativeDriver:false
-                
+                useNativeDriver: false
+
             })
         ]).start();
     }
@@ -138,6 +138,8 @@ export default function login({ navigation }) {
     }
     return (
         <KeyboardAvoidingView style={Styles.container}>
+            {isLoadingToken ? <><Text style={Styles.text}>Carregando</Text></> :
+            <>
             <View style={Styles.viewLogo}>
                 <Animated.Image style={{ height: logo.y, width: logo.x }} source={require("../../assets/logo2.png")} />
             </View>
@@ -168,35 +170,8 @@ export default function login({ navigation }) {
                 </TouchableOpacity>
 
             </Animated.View>
-            {/* { isLoadingToken ?<><Text style={Styles.text}>Carregando</Text></> :
-            <View style={Styles.log}>
-                <View style={Styles.logHeader}>
-                    <Text style={Styles.text}>Tela de Login</Text>
-                </View>
-                <TextInput 
-                style= {constStyles.input}
-                placeholder = "Usuário" 
-                placeholderTextColor = "#000"
-                value={username}
-                onChangeText = {(text) => {setUsername(text)}}
-                autoCapitalize ="none"
-                importantForAutofill = "auto"
-                />
-                <TextInput
-                    style= {constStyles.input}
-                    placeholder = "Password"
-                    placeholderTextColor = "#000"
-                    secureTextEntry = {true}
-                    value={password}
-                    onChangeText = {(text) => {setPassword(text)}}
-                    autoCapitalize ="none"
-                    importantForAutofill = "auto"
-                />
-                <TouchableOpacity style={Styles.button} onPress={login}>
-                    <Text style={Styles.textButton}>Entrar</Text>
-                </TouchableOpacity>
-            </View>
-            } */}
+            </>
+            }
         </KeyboardAvoidingView>
     );
 };
@@ -245,6 +220,7 @@ const Styles = StyleSheet.create({
     },
     text: {
         fontSize: 22,
+        color: '#fff'
     },
     textButton: {
         color: '#fff',

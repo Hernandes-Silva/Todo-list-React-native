@@ -59,7 +59,8 @@ const Styles = StyleSheet.create({
     textTitle: {
         fontSize: 25,
         fontWeight: 'bold',
-        marginBottom: 5
+        marginBottom: 15,
+        color:'#fff'
     },
     body: {
         flex: 1,
@@ -67,30 +68,24 @@ const Styles = StyleSheet.create({
         alignItems: 'center'
 
     },
-    select: { backgroundColor: 'white', borderColor: "black", borderWidth: 1, width: '100%' },
+    select: { backgroundColor: 'white', borderColor: "black", borderRadius:7, borderWidth: 1, width: '100%' },
     log: {
         padding: 30,
         width: 300,
-        borderWidth: 0.5,
+        
         borderRadius: 8,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'white',
-        elevation: 5,
-        shadowColor: 'rgb(0, 0, 0)',
-        shadowOffset: {
-            width: 3,
-            height: 3,
-        },
-        shadowOpacity: 0.5,
-        shadowRadius: 5,
+        backgroundColor: 'transparent',
+        
+        
     },
     button: {
         marginTop: 15,
         height: 45,
         borderRadius: 8,
-        backgroundColor: '#32cd32',
-        width: '70%',
+        backgroundColor: '#FF0000',
+        width: '100%',
         justifyContent: 'center',
         alignItems: 'center',
         borderWidth: 1,

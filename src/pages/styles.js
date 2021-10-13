@@ -7,6 +7,7 @@ export const constStyles = StyleSheet.create ({
         color: '#000',
         borderWidth: 1,
         borderColor: '#ddd',
+        backgroundColor:'#fff',
         marginBottom : 20,
         borderRadius:10,
         padding:15
@@ -14,6 +15,10 @@ export const constStyles = StyleSheet.create ({
     },
     container: {
         flex: 1,
-        backgroundColor: '#EBEAED'
-      },
+        backgroundColor: '#191919'
+    },
+    text:{
+        color: "#fff",
+        
+    }
 })

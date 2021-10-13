@@ -13,6 +13,7 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from "../../services/api"
 import { useIsFocused } from '@react-navigation/native'
+import  Icon  from 'react-native-vector-icons/FontAwesome';
 
 
 export default function todo_list({navigation}) {
@@ -36,7 +37,14 @@ export default function todo_list({navigation}) {
     navigation.navigate('todo-add')
   }
   renderItem = ({ item, index }) => {
-
+    let colorSquare = ""
+    if(item.status == "TOD"){
+      colorSquare = "red"
+    }else if (item.status == "INP"){
+      colorSquare = "#00FFFF"
+    }else{
+      colorSquare = "#00FF00"
+    }
     function update(){
       let id = item.id;
       let name = item.name;
@@ -45,18 +53,19 @@ export default function todo_list({navigation}) {
     }
     return (
       <View style={styles.viewTask}>
-        <View style={styles.squareRed}></View>
+        <View style={[styles.squareRed,{backgroundColor:colorSquare}]}></View>
         <Text style={styles.textTask}>{item.name}</Text>
-        <TouchableOpacity 
+        <TouchableOpacity style={{ marginHorizontal:10, }}
         onPress={update}>
-          <Text> Update</Text></TouchableOpacity>
+          <Icon name="edit" size={30} color="black"/>
+        </TouchableOpacity>
       </View>
     )
   }
   return (
     <View style={styles.container}>
       <View style={styles.tasksWrapper}>
-        <Text style={styles.sectionTitle}> To-do list</Text>
+        <Text style={styles.sectionTitle}> Tasks </Text>
         <FlatList
           style={{}}
           data={tasks}
@@ -80,7 +89,7 @@ export default function todo_list({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#EBEAED'
+    backgroundColor: '#191919'
   },
   tasksWrapper: {
     flex: 1,
@@ -89,7 +98,8 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 35,
-    fontWeight: "bold"
+    fontWeight: "bold",
+    color:'#fff'
   },
 
   viewTask: {
@@ -98,8 +108,12 @@ const styles = StyleSheet.create({
     minHeight: 50,
     backgroundColor: 'white',
     color: 'black',
-    flex: 1, flexDirection: 'row', alignItems: 'center',
-    shadowColor: 'rgb(0, 0, 0)',
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent:'space-between',
+    /* shadowColor: 'rgb(0, 0, 0)', */
+    shadowColor: '#fff',
     shadowOffset: {
       width: 3,
       height: 3,
@@ -111,23 +125,23 @@ const styles = StyleSheet.create({
 
   },
   squareRed: {
-    marginLeft: 20,
+    marginHorizontal:10,
     width: 24,
     height: 24,
-    backgroundColor: 'red',
     opacity: 0.5
   },
   textTask: {
     marginLeft: 5,
     fontSize: 17,
-    fontWeight: '700'
+    fontWeight: '700',
+    flex: 1, flexWrap: 'wrap'
   },
   button: {
     alignItems: 'center',
     justifyContent: 'center',
     width: 65,
     height: 65,
-    backgroundColor: '#32cd32',
+    backgroundColor: '#FF0000',
     borderRadius: 65,
   },
   textButton: {
