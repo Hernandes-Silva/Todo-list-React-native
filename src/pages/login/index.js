@@ -195,7 +195,7 @@ const Styles = StyleSheet.create({
         flex: 1,
         width: '90%',
         alignItems: 'center',
-        paddingBottom: 4
+        paddingBottom: 30
 
     },
     input: {
@@ -228,12 +228,14 @@ const Styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     button: {
+        
         height: 45,
         width: '90%',
         borderRadius: 7,
         backgroundColor: '#D2691E',
         justifyContent: 'center',
         alignItems: 'center',
+        
 
     }
 })
