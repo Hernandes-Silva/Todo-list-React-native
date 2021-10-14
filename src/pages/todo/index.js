@@ -13,10 +13,10 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from "../../services/api"
 import { useIsFocused } from '@react-navigation/native'
-import  Icon  from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 
-export default function todo_list({navigation}) {
+export default function todo_list({ navigation }) {
   const [tasks, setTasks] = useState([]);
   const isFocused = useIsFocused()
   React.useEffect(async () => {
@@ -38,26 +38,26 @@ export default function todo_list({navigation}) {
   }
   renderItem = ({ item, index }) => {
     let colorSquare = ""
-    if(item.status == "TOD"){
+    if (item.status == "TOD") {
       colorSquare = "red"
-    }else if (item.status == "INP"){
+    } else if (item.status == "INP") {
       colorSquare = "#00FFFF"
-    }else{
+    } else {
       colorSquare = "#00FF00"
     }
-    function update(){
+    function update() {
       let id = item.id;
       let name = item.name;
       let status = item.status;
-      navigation.navigate('todo-update', {id:id, name:name, status:status})
+      navigation.navigate('todo-update', { id: id, name: name, status: status })
     }
     return (
       <View style={styles.viewTask}>
-        <View style={[styles.squareRed,{backgroundColor:colorSquare}]}></View>
+        <View style={[styles.square, { backgroundColor: colorSquare }]}></View>
         <Text style={styles.textTask}>{item.name}</Text>
-        <TouchableOpacity style={{ marginHorizontal:10, }}
-        onPress={update}>
-          <Icon name="edit" size={30} color="black"/>
+        <TouchableOpacity style={{ marginHorizontal: 10, }}
+          onPress={update}>
+          <Icon name="edit" size={30} color="black" />
         </TouchableOpacity>
       </View>
     )
@@ -66,6 +66,12 @@ export default function todo_list({navigation}) {
     <View style={styles.container}>
       <View style={styles.tasksWrapper}>
         <Text style={styles.sectionTitle}> Tasks </Text>
+        <Text style={{ color: '#fff', marginLeft:10 }}>
+          <Text>
+          <View style={[styles.squareColor, { backgroundColor: 'red' }]}></View>:Todo  </Text>
+          <Text><View style={[styles.squareColor, { backgroundColor: '#00FFFF' }]}></View>:In progress  </Text>
+          <View style={[styles.squareColor, { backgroundColor: '#00FF00' }]}></View>:Complete
+        </Text>
         <FlatList
           style={{}}
           data={tasks}
@@ -99,7 +105,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 35,
     fontWeight: "bold",
-    color:'#fff'
+    color: '#fff'
   },
 
   viewTask: {
@@ -111,7 +117,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent:'space-between',
+    justifyContent: 'space-between',
     /* shadowColor: 'rgb(0, 0, 0)', */
     shadowColor: '#fff',
     shadowOffset: {
@@ -124,8 +130,14 @@ const styles = StyleSheet.create({
     margin: 5,
 
   },
-  squareRed: {
-    marginHorizontal:10,
+  squareColor: {
+    marginHorizontal: 10,
+    width: 10,
+    height: 10,
+    opacity: 0.5
+  },
+  square: {
+    marginHorizontal: 10,
     width: 24,
     height: 24,
     opacity: 0.5
@@ -147,7 +159,7 @@ const styles = StyleSheet.create({
   textButton: {
     fontSize: 35,
     fontWeight: "bold",
-    color:'white'
+    color: 'white'
 
   }
 });

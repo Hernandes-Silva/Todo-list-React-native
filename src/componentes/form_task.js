@@ -7,7 +7,7 @@ import { TextInput } from 'react-native-gesture-handler';
 import { constStyles } from '../pages/styles';
 import { Picker } from '@react-native-picker/picker';
 
-export default function FormTodo({task,status,setTask, setStatus, func, title, buttontext}) {
+export default function FormTodo({task,status,setTask, setStatus, func, title, buttontext, deleted = false, funcDelet}) {
 
     return (
         <View style={constStyles.container}>
@@ -44,6 +44,10 @@ export default function FormTodo({task,status,setTask, setStatus, func, title, b
                     <TouchableOpacity style={Styles.button} onPress={func}>
                         <Text style={Styles.textButton}>{buttontext}</Text>
                     </TouchableOpacity>
+                    {deleted ? <TouchableOpacity style={Styles.button} onPress={funcDelet}>
+                        <Text style={Styles.textButton}>Delete</Text>
+                    </TouchableOpacity>: <></>}
+                    
                 </View>
             </View>
         </View>

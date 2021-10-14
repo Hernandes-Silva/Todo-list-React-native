@@ -148,7 +148,7 @@ export default function login({ navigation }) {
             ]} >
                 <TextInput
                     style={Styles.input}
-                    placeholder="Usuário"
+                    placeholder="User"
                     placeholderTextColor="#000"
                     value={username}
                     onChangeText={(text) => { setUsername(text) }}

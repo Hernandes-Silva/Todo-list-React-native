@@ -30,6 +30,6 @@ export default function todo_add({ navigation }) {
         }
     }
     return (
-        <FormTodo task={task} status={status} func={newTask} setTask={setTask} setStatus={setStatus}title={title} buttontext={'Update'} />
+        <FormTodo task={task} status={status} func={newTask} setTask={setTask} setStatus={setStatus}title={title} buttontext='Create' />
     );
 };
