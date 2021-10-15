@@ -11,14 +11,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const Stack = createStackNavigator();
 const textcolor = "#fff"
 const navigationRef = React.createRef();
-export default function App({navigation}) {
+export default function App({ navigation }) {
     async function logout() {
         try {
-          await AsyncStorage.removeItem("token");
-          navigationRef.current?.navigate('login')
+            await AsyncStorage.removeItem("token");
+            navigationRef.current?.reset({index:0, routes: [{name:'login'}]})
         }
-        catch(exception) {
-          alert(exception)
+        catch (exception) {
+            alert(exception)
         }
     }
     return (
@@ -45,20 +45,20 @@ export default function App({navigation}) {
                     component={todo_list}
                 />
                 <Stack.Screen name="todo-add"
-                options={{
+                    options={{
                         title: 'Create task',
                         headerTintColor: textcolor,
                         headerTitleStyle: { color: '#fff', alignItems: 'center', justifyContent: 'center' },
                         headerStyle: { backgroundColor: '#FF0000' }
                     }} component={todo_add} />
                 <Stack.Screen name="todo-update"
-                options={{
-                    title: 'Update task',
-                    headerTintColor: textcolor,
-                    headerTitleStyle: { color: '#fff', alignItems: 'center', justifyContent: 'center' },
-                    headerStyle: { backgroundColor: '#FF0000' }
-                }}
-                component={todo_update} />
+                    options={{
+                        title: 'Update task',
+                        headerTintColor: textcolor,
+                        headerTitleStyle: { color: '#fff', alignItems: 'center', justifyContent: 'center' },
+                        headerStyle: { backgroundColor: '#FF0000' }
+                    }}
+                    component={todo_update} />
             </Stack.Navigator>
         </NavigationContainer>
     )

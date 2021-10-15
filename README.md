@@ -16,8 +16,8 @@
 
 
 <h1 align="center">
-  <img alt="Todo List APP" title="Todo List APP" src="" height="425" />
-  <img alt="Todo List APP" title="Todo List APP" src="./github/WeatherAppThemePersistAndCityNotFound.gif" height="425" />
+  <img alt="Todo List APP" title="Todo List APP" src="./github/tasks.gif" height="425" />
+  <img alt="Todo List APP" title="Todo List APP" src="./github/tasks.gif" height="425" />
 
 </h1>
 

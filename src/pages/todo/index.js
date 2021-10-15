@@ -19,24 +19,32 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 export default function todo_list({ navigation }) {
   const [tasks, setTasks] = useState([]);
   const isFocused = useIsFocused()
+  const [isLoading, setIsloading] = useState(true)
   React.useEffect(async () => {
-    const token = await AsyncStorage.getItem("token")
-    try {
-      var response = await api.get(`api/tasks/`, {
-        headers: { Authorization: `Bearer ${token}` }
-      })
-    } catch (error) {
-      console.log(error);
-      var response = false;
+    let token = await AsyncStorage.getItem("token")
+    if (token != null) {
+      try {
+        var response = await api.get(`api/tasks/`, {
+          headers: { Authorization: `Bearer ${token}` }
+        })
+      } catch (error) {
+        
+        var response = false;
+      }
+      if (response != false) {
+        setTasks(response.data)
+        setIsloading(false)
+      }
+    }else{
+      navigation.navigate('login')
     }
-    if (response != false) {
-      setTasks(response.data)
-    }
+
   }, [isFocused]);
+
   function add() {
     navigation.navigate('todo-add')
   }
-  renderItem = ({ item, index }) => {
+  const renderItem = ({ item, index }) => {
     let colorSquare = ""
     if (item.status == "TOD") {
       colorSquare = "red"
@@ -66,18 +74,18 @@ export default function todo_list({ navigation }) {
     <View style={styles.container}>
       <View style={styles.tasksWrapper}>
         <Text style={styles.sectionTitle}> Tasks </Text>
-        <Text style={{ color: '#fff', marginLeft:10 }}>
+        <Text style={{ color: '#fff', marginLeft: 10 }}>
           <Text>
-          <View style={[styles.squareColor, { backgroundColor: 'red' }]}></View>:Todo  </Text>
+            <View style={[styles.squareColor, { backgroundColor: 'red' }]}></View>:Todo  </Text>
           <Text><View style={[styles.squareColor, { backgroundColor: '#00FFFF' }]}></View>:In progress  </Text>
           <View style={[styles.squareColor, { backgroundColor: '#00FF00' }]}></View>:Complete
         </Text>
-        <FlatList
+        {isLoading ? <></> : <FlatList
           style={{}}
           data={tasks}
           renderItem={renderItem}
           keyExtractor={item => `key ${item.id}`}
-        />
+        />}
       </View>
 
       <View style={{ position: 'absolute', bottom: 20, right: 10, alignSelf: 'flex-end' }}>

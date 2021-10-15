@@ -22,12 +22,6 @@ export default function login({ navigation }) {
     const [logo] = useState(new Animated.ValueXY({ x: 160, y: 200 }))
     React.useEffect(async () => {
         loginComToken()
-        AsyncStorage.getItem('token').then((token) => {
-            console.log("entrando no async")
-            loginComToken(token)
-        }).catch((error) => {
-            setIsLoadingToken(false)
-        });
         keybardDidShowListener = Keyboard.addListener('keyboardDidShow', keyboardDidShow)
         keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', keyboardDidHide)
         Animated.parallel([
@@ -76,11 +70,9 @@ export default function login({ navigation }) {
             })
         ]).start();
     }
-    function test() {
-        console.log("bbb")
-    }
+    
     const verificarToken = async (token) => {
-        console.log("verificandoToken")
+        
         const formData = new FormData();
         formData.append("token", token);
         await api.post('api/token/verify/', formData, {
@@ -94,20 +86,18 @@ export default function login({ navigation }) {
             setIsLoadingToken(false)
         })
     }
-    const loginComToken = async (token) => {
-        token = await AsyncStorage.getItem('token')
+    const loginComToken = async () => {
+        let token = await AsyncStorage.getItem('token')
         if (token == 'null' || token == null) {
-
+            
             setIsLoadingToken(false)
         } else {
-
+            
             verificarToken(token)
         }
-
     }
-
     const login = async () => {
-        console.log("prestou")
+       
         if (username == "" || password == "") {
             Alert.alert('Preencha os campos!!');
         } else {
@@ -122,11 +112,11 @@ export default function login({ navigation }) {
                     }
                 })
             } catch (error) {
-                console.log(error)
+               
                 var response = false
             }
             if (response != false) {
-                console.log(response.data)
+                
                 const { access } = response.data
 
                 await AsyncStorage.setItem('token', access);
