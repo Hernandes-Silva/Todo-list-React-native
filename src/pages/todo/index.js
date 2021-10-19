@@ -12,15 +12,15 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from "../../services/api"
-import { useIsFocused } from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 export default function todo_list({ navigation }) {
   const [tasks, setTasks] = useState([]);
-  const isFocused = useIsFocused()
+  const [load,setLoad] = useState(true)
   const [isLoading, setIsloading] = useState(true)
   React.useEffect(async () => {
+    
     let token = await AsyncStorage.getItem("token")
     if (token != null) {
       try {
@@ -38,8 +38,8 @@ export default function todo_list({ navigation }) {
     }else{
       navigation.navigate('login')
     }
-
-  }, [isFocused]);
+    navigation.addListener('focus', ()=>setLoad(!load))
+  }, [load, navigation]);
 
   function add() {
     navigation.navigate('todo-add')

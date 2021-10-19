@@ -8,8 +8,6 @@ import { TextInput } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from "../../services/api"
 
-import { constStyles } from '../styles';
-import { useAnimatedGestureHandler } from 'react-native-reanimated';
 
 
 
@@ -20,10 +18,11 @@ export default function login({ navigation }) {
     const [offset] = useState(new Animated.ValueXY({ x: 0, y: 80 }))
     const [opacity] = useState(new Animated.Value(0.3))
     const [logo] = useState(new Animated.ValueXY({ x: 160, y: 200 }))
+    const [load,setLoad] = useState(true)
     React.useEffect(async () => {
-        loginComToken()
-        keybardDidShowListener = Keyboard.addListener('keyboardDidShow', keyboardDidShow)
-        keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', keyboardDidHide)
+        await loginComToken()
+        Keyboard.addListener('keyboardDidShow', keyboardDidShow)
+        Keyboard.addListener('keyboardDidHide', keyboardDidHide)
         Animated.parallel([
             Animated.spring(offset.y, {
                 toValue: 0,
@@ -38,8 +37,8 @@ export default function login({ navigation }) {
             })
 
         ]).start();
-
-    }, []);
+        navigation.addListener('focus', ()=>setLoad(!load))
+    }, [load, navigation]);
     function keyboardDidShow() {
         Animated.parallel([
             Animated.timing(logo.y, {
@@ -72,7 +71,6 @@ export default function login({ navigation }) {
     }
     
     const verificarToken = async (token) => {
-        
         const formData = new FormData();
         formData.append("token", token);
         await api.post('api/token/verify/', formData, {
@@ -81,6 +79,7 @@ export default function login({ navigation }) {
                 'Content-Type': 'multipart/form-data'
             }
         }).then((response) => {
+            
             navigation.navigate('todo-list')
         }).catch((error) => {
             setIsLoadingToken(false)
