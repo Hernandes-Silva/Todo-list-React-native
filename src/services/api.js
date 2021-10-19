@@ -1,5 +1,5 @@
 import axios from 'axios'
 const api = axios.create({
-    baseURL: "http://192.168.1.6:8000/"
+    baseURL: "https://silva-todo-api.herokuapp.com/"
 })
 export default api

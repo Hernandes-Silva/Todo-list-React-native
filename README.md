@@ -70,6 +70,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [React Native Vector Icons](https://github.com/oblador/react-native-vector-icons)
 - [Axios](https://github.com/axios/axios)
 - [AsyncStorage](https://github.com/react-native-async-storage/async-storage)
+- [API Django](https://silva-todo-api.herokuapp.com/api/)
 
 
 
